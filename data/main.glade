@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.2 -->
+<interface>
+  <requires lib="gtk+" version="3.0"/>
+  <menu id="menubar">
+    <submenu>
+      <attribute name="label" translatable="yes">_File</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">_New Project</attribute>
+          <attribute name="action">app.new</attribute>
+	  <attribute name="accel">&lt;Primary&gt;N</attribute>
+        </item> 
+        <item>
+          <attribute name="label" translatable="yes">_Open Project</attribute>
+          <attribute name="action">app.open</attribute>
+	  <attribute name="accel">&lt;Primary&gt;O</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">_Save Project</attribute>
+          <attribute name="action">app.save</attribute>
+	  <attribute name="accel">&lt;Primary&gt;S</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">_Close Project</attribute>
+          <attribute name="action">app.close</attribute>
+        </item>
+      </section>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">_Quit</attribute>
+          <attribute name="hidden-when">macos-menubar</attribute>
+          <attribute name="action">app.quit</attribute>
+	  <attribute name="accel">&lt;Primary&gt;Q</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Edit</attribute>
+      <section>
+        <item>
+	  <attribute name="label" translatable="yes">_Undo</attribute>
+          <attribute name="action">app.undo</attribute>
+	  <attribute name="accel">&lt;Primary&gt;Z</attribute>
+        </item>
+        <item>
+	  <attribute name="label" translatable="yes">_Redo</attribute>
+          <attribute name="action">app.redo</attribute>
+	  <attribute name="accel">&lt;Primary&gt;Y</attribute>
+        </item>
+      </section>
+      <section>
+        <item>
+	  <attribute name="label" translatable="yes">_Copy</attribute>
+          <attribute name="action">app.copy</attribute>
+	  <attribute name="accel">&lt;Primary&gt;C</attribute>
+        </item>
+        <item>
+	  <attribute name="label" translatable="yes">C_ut</attribute>
+          <attribute name="action">app.cut</attribute>
+	  <attribute name="accel">&lt;Primary&gt;X</attribute>
+        </item>
+        <item>
+	  <attribute name="label" translatable="yes">_Paste</attribute>
+          <attribute name="action">app.paste</attribute>
+	  <attribute name="accel">&lt;Primary&gt;V</attribute>
+        </item>
+        <item>
+	  <attribute name="label" translatable="yes">_Delete</attribute>
+          <attribute name="action">app.delete</attribute>
+	  <attribute name="accel">Delete</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_View</attribute>
+      <section>
+        <item>
+	  <attribute name="label" translatable="yes">_Current Layer and Below</attribute>
+          <attribute name="action">app.layerview</attribute>
+          <attribute name="target">below</attribute>
+	  <attribute name="accel">F2</attribute>
+        </item>
+        <item>
+	  <attribute name="label" translatable="yes">_All Layers</attribute>
+          <attribute name="action">app.layerview</attribute>
+          <attribute name="target">all</attribute>
+	  <attribute name="accel">F3</attribute>
+        </item>
+      </section>
+      <section>
+        <item>
+	  <attribute name="label" translatable="yes">_Dim Layers</attribute>
+	  <attribute name="action">app.dim</attribute>
+	  <attribute name="accel">F4</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Mode</attribute>
+      <section>
+	<item>
+	  <attribute name="label" translatable="yes">Layer _1</attribute>
+	  <attribute name="action">app.layeredit</attribute>
+	  <attribute name="target">layer1</attribute>
+	  <attribute name="accel">F5</attribute>
+	</item>
+	<item>
+	  <attribute name="label" translatable="yes">Layer _2</attribute>
+	  <attribute name="action">app.layeredit</attribute>
+	  <attribute name="target">layer2</attribute>
+	  <attribute name="accel">F6</attribute>
+	</item>
+	<item>
+	  <attribute name="label" translatable="yes">Layer _3</attribute>
+	  <attribute name="action">app.layeredit</attribute>
+	  <attribute name="target">layer3</attribute>
+	  <attribute name="accel">F7</attribute>
+	</item>
+      </section>
+      <section>
+	<item>
+	  <attribute name="label" translatable="yes">_Events</attribute>
+	  <attribute name="action">app.layeredit</attribute>
+	  <attribute name="target">events</attribute>
+	  <attribute name="accel">F8</attribute>
+	</item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Tools</attribute>
+      <item>
+	<attribute name="label" translatable="yes">_Run Game</attribute>
+        <attribute name="action">app.run</attribute>
+	<attribute name="accel">F9</attribute>
+      </item>
+      <item>
+	<attribute name="label" translatable="yes">_Database</attribute>
+	<attribute name="action">app.database</attribute>
+	<attribute name="accel">F10</attribute>
+      </item>
+      <item>
+	<attribute name="label" translatable="yes">_Script</attribute>
+	<attribute name="action">app.scripts</attribute>
+	<attribute name="accel">F11</attribute>
+      </item>
+      <item>
+	<attribute name="label" translatable="yes">So_und Test</attribute>
+	<attribute name="action">app.audio</attribute>
+      </item>
+      <item>
+	<attribute name="label" translatable="yes">R_TP Directory</attribute>
+	<attribute name="action">app.rtp</attribute>
+      </item>
+      <item>
+	<attribute name="label" translatable="yes">_Open Game Directory</attribute>
+	<attribute name="action">app.directory</attribute>
+      </item>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Help</attribute>
+    </submenu>
+  </menu>
+  <object class="GtkTreeStore" id="mapinfo-store">
+    <columns>
+      <column type="gchararray"/>
+      <column type="guint"/>
+    </columns>
+  </object>
+  <object class="GtkAlignment" id="widget">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkHBox" id="hbox1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkVPaned" id="vpaned1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolled-palette">
+                <property name="width_request">256</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="resize">False</property>
+                <property name="shrink">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledwindow2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <object class="GtkTreeView" id="mapinfo-tv">
+                    <property name="activate_on_single_click">True</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">mapinfo-store</property>
+                    <property name="headers_visible">False</property>
+                    <property name="reorderable">True</property>
+                    <property name="search_column">0</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                        <property name="title">ID</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_indicator">True</property>
+                        <property name="sort_column_id">0</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="resize">True</property>
+                <property name="shrink">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolled-map">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

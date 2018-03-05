@@ -1,0 +1,6 @@
+*.swp
+*~
+locale/
+rpgxp
+data/system/GMGSx.sf2
+data/system/mkxp_linux

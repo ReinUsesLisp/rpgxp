@@ -1,0 +1,1256 @@
+# Spanish translations for PACKAGE package
+# Traducciones al español para el paquete PACKAGE.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ReinUsesLisp <reinuseslisp@airmail.cc>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-02 04:42-0300\n"
+"PO-Revision-Date: 2018-02-23 23:47-0300\n"
+"Last-Translator: ReinUsesLisp <reinuseslisp@airmail.cc>\n"
+"Language-Team: Argentinian\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/actor.glade:48 data/conditional_branch.glade:808 data/event.glade:48
+#: data/map_properties.glade:80
+msgid "Name"
+msgstr ""
+
+#: data/actor.glade:81
+msgid "Class"
+msgstr ""
+
+#: data/actor.glade:116 data/conditional_branch.glade:517
+msgid "Character"
+msgstr ""
+
+#: data/actor.glade:151
+msgid "Battler"
+msgstr ""
+
+#: data/actor.glade:199
+msgid "Max HP"
+msgstr ""
+
+#: data/actor.glade:233
+msgid "Max SP"
+msgstr ""
+
+#: data/actor.glade:267
+msgid "STR"
+msgstr ""
+
+#: data/actor.glade:301
+msgid "DEX"
+msgstr ""
+
+#: data/actor.glade:335
+msgid "INT"
+msgstr ""
+
+#: data/actor.glade:369
+msgid "AGI"
+msgstr ""
+
+#. As in "You can't change this item"
+#: data/actor.glade:421 data/actor.glade:485 data/actor.glade:549
+#: data/actor.glade:613 data/actor.glade:677
+#, fuzzy
+msgid "Fix"
+msgstr "Fijo"
+
+#: data/actor.glade:458
+msgid "Armor 1"
+msgstr ""
+
+#: data/actor.glade:522 data/conditional_branch.glade:671
+msgid "Weapon"
+msgstr ""
+
+#: data/actor.glade:586
+msgid "Armor 2"
+msgstr ""
+
+#: data/actor.glade:650
+msgid "Armor 3"
+msgstr ""
+
+#: data/actor.glade:714
+msgid "Armor 4"
+msgstr ""
+
+#: data/actor.glade:785
+msgid "Base"
+msgstr ""
+
+#: data/actor.glade:820
+msgid "Grow"
+msgstr ""
+
+#: data/actor.glade:860
+msgid "Initial Level"
+msgstr ""
+
+#: data/actor.glade:893
+msgid "Final Level"
+msgstr ""
+
+#: data/audio.glade:86
+msgid "Volume"
+msgstr ""
+
+#: data/audio.glade:125
+#, fuzzy
+msgid "Pitch"
+msgstr "Interruptor"
+
+#: data/button_input_processing.glade:46 data/button_input_processing2.glade:45
+msgid "takes button code"
+msgstr ""
+
+#: data/button_input_processing.glade:62 data/button_input_processing2.glade:62
+#: data/input_number.glade:41
+#, fuzzy
+msgid "Target variable"
+msgstr "Variable"
+
+#: data/change_frequency.glade:12 data/event_page.glade:66
+msgid "1: Lowest"
+msgstr "1: Bajísima"
+
+#: data/change_frequency.glade:15 data/event_page.glade:69
+msgid "2: Lower"
+msgstr "2: Muy baja"
+
+#: data/change_frequency.glade:18 data/event_page.glade:72
+msgid "3: Low"
+msgstr "3: Baja"
+
+#: data/change_frequency.glade:21 data/event_page.glade:75
+msgid "4: High"
+msgstr "4: Alta"
+
+#: data/change_frequency.glade:24 data/event_page.glade:78
+msgid "5: Higher"
+msgstr "5: Muy alta"
+
+#: data/change_frequency.glade:27 data/event_page.glade:81
+msgid "6: Highest"
+msgstr "6: Altísima"
+
+#: data/change_frequency.glade:69
+#, fuzzy
+msgid "Move Frequency"
+msgstr "Cambiar Frecuencia"
+
+#: data/change_speed.glade:12 data/event_page.glade:40
+msgid "1: Slowest"
+msgstr "1: Lentísimo"
+
+#: data/change_speed.glade:15 data/event_page.glade:43
+msgid "2: Slower"
+msgstr "2: Muy Lento"
+
+#: data/change_speed.glade:18 data/event_page.glade:46
+msgid "3: Slow"
+msgstr "3: Lento"
+
+#: data/change_speed.glade:21 data/event_page.glade:49
+msgid "4: Fast"
+msgstr "4: Rápido"
+
+#: data/change_speed.glade:24 data/event_page.glade:52
+msgid "5: Faster"
+msgstr "5: Muy Rápido"
+
+#: data/change_speed.glade:27 data/event_page.glade:55
+msgid "6: Fastest"
+msgstr "6: Rapidísimo"
+
+#: data/change_speed.glade:69
+#, fuzzy
+msgid "Move Speed"
+msgstr "Mover hacia Arriba"
+
+#: data/change_text_options.glade:32
+msgid "Top"
+msgstr ""
+
+#: data/change_text_options.glade:47
+msgid "Middle"
+msgstr ""
+
+#: data/change_text_options.glade:62
+msgid "Bottom"
+msgstr ""
+
+#: data/change_text_options.glade:83
+#, fuzzy
+msgid "Position"
+msgstr "Condiciones"
+
+#: data/change_text_options.glade:113
+msgid "Show"
+msgstr ""
+
+#: data/change_text_options.glade:128
+msgid "Hide"
+msgstr ""
+
+#: data/change_text_options.glade:149
+msgid "Window"
+msgstr ""
+
+#: data/command_chooser.glade:10
+msgid "Command Chooser"
+msgstr ""
+
+#: data/command_chooser.glade:69
+msgid "Show Text"
+msgstr ""
+
+#: data/command_chooser.glade:83
+msgid "Show Choices"
+msgstr ""
+
+#: data/command_chooser.glade:97
+msgid "Input Number"
+msgstr ""
+
+#: data/command_chooser.glade:111
+#, fuzzy
+msgid "Change Text Options"
+msgstr "Cambiar Transparencia"
+
+#: data/command_chooser.glade:125
+msgid "Button Input Processing"
+msgstr ""
+
+#: data/command_chooser.glade:139 data/move_route.glade:348
+msgid "Wait"
+msgstr "Esperar"
+
+#: data/command_chooser.glade:153
+msgid "Comment"
+msgstr ""
+
+#: data/command_chooser.glade:171
+msgid "Text"
+msgstr ""
+
+#: data/command_chooser.glade:192
+#, fuzzy
+msgid "Conditional Branch"
+msgstr "Condiciones"
+
+#: data/command_chooser.glade:206
+msgid "Loop"
+msgstr ""
+
+#: data/command_chooser.glade:220
+msgid "Break Loop"
+msgstr ""
+
+#: data/command_chooser.glade:234
+msgid "Exit Event Processing"
+msgstr ""
+
+#: data/command_chooser.glade:248
+msgid "Erase Event"
+msgstr ""
+
+#: data/command_chooser.glade:262
+msgid "Call Common Event"
+msgstr ""
+
+#: data/command_chooser.glade:276
+msgid "Label"
+msgstr ""
+
+#: data/command_chooser.glade:290
+msgid "Jump to Label"
+msgstr ""
+
+#: data/command_chooser.glade:308
+msgid "Flow Control"
+msgstr ""
+
+#: data/command_chooser.glade:329
+msgid "Control Switches"
+msgstr ""
+
+#: data/command_chooser.glade:343
+#, fuzzy
+msgid "Control Variables"
+msgstr "Variable"
+
+#: data/command_chooser.glade:357
+#, fuzzy
+msgid "Control Self Switch"
+msgstr "Interruptor propio"
+
+#: data/command_chooser.glade:371
+msgid "Control Timer"
+msgstr ""
+
+#: data/command_chooser.glade:385
+#, fuzzy
+msgid "Change Gold"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:399
+#, fuzzy
+msgid "Change Items"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:413
+#, fuzzy
+msgid "Change Weapons"
+msgstr "Cambiar Gráfico"
+
+#: data/command_chooser.glade:427
+#, fuzzy
+msgid "Change Armor"
+msgstr "Cambiar Gráfico"
+
+#: data/command_chooser.glade:441
+#, fuzzy
+msgid "Change Party Member"
+msgstr "Cambiar Transparencia"
+
+#: data/command_chooser.glade:459
+#, fuzzy
+msgid "Game"
+msgstr "_Ejecutar Juego"
+
+#: data/command_chooser.glade:480
+#, fuzzy
+msgid "Change Windowskin"
+msgstr "Cambiar Renderizado"
+
+#: data/command_chooser.glade:494
+#, fuzzy
+msgid "Change Battle BGM"
+msgstr "Cambiar Renderizado"
+
+#: data/command_chooser.glade:508
+#, fuzzy
+msgid "Change Battle End ME"
+msgstr "Cambiar Renderizado"
+
+#: data/command_chooser.glade:522
+#, fuzzy
+msgid "Change Save Access"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:536
+#, fuzzy
+msgid "Change Menu Access"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:550
+#, fuzzy
+msgid "Change Encounter"
+msgstr "Cambiar Transparencia"
+
+#: data/command_chooser.glade:568
+msgid "Metagame"
+msgstr ""
+
+#: data/command_chooser.glade:589
+#, fuzzy
+msgid "Transfer Player"
+msgstr "Mirar hacia el Jugador"
+
+#: data/command_chooser.glade:603
+msgid "Set Event Location"
+msgstr ""
+
+#: data/command_chooser.glade:617
+msgid "Scroll Map"
+msgstr ""
+
+#: data/command_chooser.glade:631
+#, fuzzy
+msgid "Change Map Settings"
+msgstr "Cambiar Renderizado"
+
+#: data/command_chooser.glade:645
+msgid "Change Fog Color Tone"
+msgstr ""
+
+#: data/command_chooser.glade:659
+#, fuzzy
+msgid "Change Fog Opacity"
+msgstr "Cambiar Transparencia"
+
+#: data/command_chooser.glade:673
+#, fuzzy
+msgid "Show Animation"
+msgstr "Animar al estar Quieto"
+
+#: data/command_chooser.glade:687
+msgid "Change Transparent Flag"
+msgstr ""
+
+#: data/command_chooser.glade:701
+#, fuzzy
+msgid "Set Move Route"
+msgstr "Ruta de Movimiento"
+
+#: data/command_chooser.glade:715
+msgid "Wait for Move's Completion"
+msgstr ""
+
+#: data/command_chooser.glade:733
+msgid "Map"
+msgstr ""
+
+#: data/command_chooser.glade:754
+msgid "Prepare for Transition"
+msgstr ""
+
+#: data/command_chooser.glade:768
+msgid "Execute Transition"
+msgstr ""
+
+#: data/command_chooser.glade:782
+msgid "Change Screen Color Tone"
+msgstr ""
+
+#: data/command_chooser.glade:796
+msgid "Screen Flash"
+msgstr ""
+
+#: data/command_chooser.glade:810
+msgid "Screen Shake"
+msgstr ""
+
+#: data/command_chooser.glade:828
+msgid "Screen"
+msgstr ""
+
+#: data/command_chooser.glade:849
+msgid "Show Picture"
+msgstr ""
+
+#: data/command_chooser.glade:863
+#, fuzzy
+msgid "Move Picture"
+msgstr "Ruta de Movimiento"
+
+#: data/command_chooser.glade:877
+msgid "Rotate Picture"
+msgstr ""
+
+#: data/command_chooser.glade:891
+msgid "Change Picture Color Tone"
+msgstr ""
+
+#: data/command_chooser.glade:905
+msgid "Erase Picture"
+msgstr ""
+
+#: data/command_chooser.glade:919
+msgid "Set Weather Effects"
+msgstr ""
+
+#: data/command_chooser.glade:937
+#, fuzzy
+msgid "Graphics"
+msgstr "Gráfico"
+
+#: data/command_chooser.glade:958
+#, fuzzy
+msgid "Play BGM"
+msgstr "Reproducir SE"
+
+#: data/command_chooser.glade:972
+msgid "Fade out BGM"
+msgstr ""
+
+#: data/command_chooser.glade:986
+#, fuzzy
+msgid "Play BGS"
+msgstr "Reproducir SE"
+
+#: data/command_chooser.glade:1000
+msgid "Fade out BGS"
+msgstr ""
+
+#: data/command_chooser.glade:1014
+msgid "Memorize BGM/BGS"
+msgstr ""
+
+#: data/command_chooser.glade:1028
+msgid "Restore BGM/BGS"
+msgstr ""
+
+#: data/command_chooser.glade:1042
+#, fuzzy
+msgid "Play ME"
+msgstr "Reproducir SE"
+
+#: data/command_chooser.glade:1056 data/move_route.glade:599
+msgid "Play SE"
+msgstr "Reproducir SE"
+
+#: data/command_chooser.glade:1070
+msgid "Stop SE"
+msgstr ""
+
+#: data/command_chooser.glade:1088
+msgid "Audio"
+msgstr ""
+
+#: data/command_chooser.glade:1109
+#, fuzzy
+msgid "Battle Processing"
+msgstr "Proceso paralelo"
+
+#: data/command_chooser.glade:1123
+msgid "Shop Processing"
+msgstr ""
+
+#: data/command_chooser.glade:1137
+msgid "Name Input Processing"
+msgstr ""
+
+#: data/command_chooser.glade:1155
+msgid "Menu"
+msgstr ""
+
+#: data/command_chooser.glade:1176
+#, fuzzy
+msgid "Change HP"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1190
+#, fuzzy
+msgid "Change SP"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1204
+#, fuzzy
+msgid "Change State"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1218
+msgid "Recover All"
+msgstr ""
+
+#: data/command_chooser.glade:1232
+#, fuzzy
+msgid "Change EXP"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1246
+#, fuzzy
+msgid "Change Level"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1260
+#, fuzzy
+msgid "Change Parameters"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1274
+#, fuzzy
+msgid "Change Skills"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1288
+#, fuzzy
+msgid "Change Equipment"
+msgstr "Cambiar Frecuencia"
+
+#: data/command_chooser.glade:1302
+msgid "Change Actor Name"
+msgstr ""
+
+#: data/command_chooser.glade:1316
+msgid "Change Actor Class"
+msgstr ""
+
+#: data/command_chooser.glade:1330
+#, fuzzy
+msgid "Change Actor Graphic"
+msgstr "Cambiar Gráfico"
+
+#: data/command_chooser.glade:1348 data/conditional_branch.glade:404
+msgid "Actor"
+msgstr ""
+
+#: data/command_chooser.glade:1369
+msgid "Change Enemy HP"
+msgstr ""
+
+#: data/command_chooser.glade:1383
+msgid "Change Enemy SP"
+msgstr ""
+
+#: data/command_chooser.glade:1397
+#, fuzzy
+msgid "Change Enemy State"
+msgstr "Cambiar Velocidad"
+
+#: data/command_chooser.glade:1411
+msgid "Enemy Recover All"
+msgstr ""
+
+#: data/command_chooser.glade:1425
+msgid "Enemy Appearance"
+msgstr ""
+
+#: data/command_chooser.glade:1439
+msgid "Enemy Transform"
+msgstr ""
+
+#: data/command_chooser.glade:1453
+#, fuzzy
+msgid "Show Battle Animation"
+msgstr "Animar al Moverse"
+
+#: data/command_chooser.glade:1467
+msgid "Deal Damage"
+msgstr ""
+
+#: data/command_chooser.glade:1481
+#, fuzzy
+msgid "Force Action"
+msgstr "Animar al Moverse"
+
+#: data/command_chooser.glade:1495
+msgid "Abort Battle"
+msgstr ""
+
+#: data/command_chooser.glade:1512 data/conditional_branch.glade:431
+msgid "Enemy"
+msgstr ""
+
+#: data/command_chooser.glade:1533
+msgid "Call Menu Screen"
+msgstr ""
+
+#: data/command_chooser.glade:1547
+msgid "Call Save Screen"
+msgstr ""
+
+#: data/command_chooser.glade:1561
+msgid "Game Over"
+msgstr ""
+
+#: data/command_chooser.glade:1575
+msgid "Return to Title Screen"
+msgstr ""
+
+#: data/command_chooser.glade:1589 data/conditional_branch.glade:752
+#: data/move_route.glade:584
+msgid "Script"
+msgstr "Script"
+
+#: data/command_chooser.glade:1607
+msgid "Misc"
+msgstr ""
+
+#: data/conditional_branch.glade:33 data/event_page.glade:386
+#: data/event_page.glade:405 data/switch.glade:48
+msgid "Switch"
+msgstr "Interruptor"
+
+#: data/conditional_branch.glade:78 data/conditional_branch.glade:182
+#: data/event_page.glade:426
+msgid "Variable"
+msgstr "Variable"
+
+#: data/conditional_branch.glade:133
+msgid "Constant"
+msgstr ""
+
+#: data/conditional_branch.glade:289 data/event_page.glade:447
+msgid "Self Switch"
+msgstr "Interruptor propio"
+
+#: data/conditional_branch.glade:304
+msgid "Timer"
+msgstr ""
+
+#: data/conditional_branch.glade:345
+msgid "minutes"
+msgstr ""
+
+#: data/conditional_branch.glade:373
+msgid "seconds"
+msgstr ""
+
+#: data/conditional_branch.glade:464
+msgid "Appeared"
+msgstr ""
+
+#: data/conditional_branch.glade:484 data/conditional_branch.glade:864
+msgid "State"
+msgstr ""
+
+#: data/conditional_branch.glade:550
+msgid "Facing"
+msgstr ""
+
+#: data/conditional_branch.glade:590
+msgid "Gold"
+msgstr ""
+
+#: data/conditional_branch.glade:644
+msgid "Item"
+msgstr ""
+
+#: data/conditional_branch.glade:698 data/conditional_branch.glade:850
+msgid "Armor"
+msgstr ""
+
+#: data/conditional_branch.glade:725
+#, fuzzy
+msgid "Button"
+msgstr "Botón"
+
+#: data/conditional_branch.glade:798
+msgid "In party"
+msgstr ""
+
+#: data/conditional_branch.glade:822
+msgid "Skill"
+msgstr ""
+
+#: data/conditional_branch.glade:836
+msgid "Weapons"
+msgstr ""
+
+#: data/conditional_branch.glade:974
+msgid "Include a branch when conditions do no apply"
+msgstr ""
+
+#: data/event_page.glade:20
+msgid "Fixed"
+msgstr "Fijo"
+
+#: data/event_page.glade:23
+msgid "Random"
+msgstr "Azar"
+
+#: data/event_page.glade:26
+msgid "Approach"
+msgstr "Acercar"
+
+#: data/event_page.glade:29
+msgid "Custom"
+msgstr "Personalizado"
+
+#: data/event_page.glade:185 data/event_page.glade:228
+#: data/event_page.glade:363
+msgid "is ON"
+msgstr "está encendido"
+
+#: data/event_page.glade:273
+msgid "is"
+msgstr "es"
+
+#: data/event_page.glade:318
+msgid "or above"
+msgstr "o mayor"
+
+#: data/event_page.glade:480
+msgid "Conditions"
+msgstr "Condiciones"
+
+#: data/event_page.glade:527
+msgid "Graphic"
+msgstr "Gráfico"
+
+#: data/event_page.glade:609
+msgid "Freq.:"
+msgstr "Freq.:"
+
+#: data/event_page.glade:629
+msgid "Speed:"
+msgstr "Veloc.:"
+
+#: data/event_page.glade:649
+msgid "Type:"
+msgstr "Tipo:"
+
+#: data/event_page.glade:659
+msgid "Move Route"
+msgstr "Ruta de Movimiento"
+
+#: data/event_page.glade:700
+msgid "Automatic movement"
+msgstr "Movimiento automático"
+
+#: data/event_page.glade:742
+msgid "Move Animation"
+msgstr "Animar al Moverse"
+
+#: data/event_page.glade:756
+msgid "Stop Animation"
+msgstr "Animar al estar Quieto"
+
+#: data/event_page.glade:770
+msgid "Direction Fix"
+msgstr "Dirección Fija"
+
+#: data/event_page.glade:784
+msgid "Through"
+msgstr "Traspasar"
+
+#: data/event_page.glade:798
+msgid "Always on Top"
+msgstr "Siempre Arriba"
+
+#: data/event_page.glade:818 data/graphic.glade:198 data/move_route.glade:143
+msgid "Options"
+msgstr "Opciones"
+
+#: data/event_page.glade:848
+msgid "Action Button"
+msgstr "Botón"
+
+#: data/event_page.glade:863
+msgid "Player Touch"
+msgstr "Tocado por el Jugador"
+
+#: data/event_page.glade:878
+msgid "Event Touch"
+msgstr "Tocado por el Evento"
+
+#: data/event_page.glade:893
+msgid "Autorun"
+msgstr "Auto-ejecutar"
+
+#: data/event_page.glade:908
+msgid "Parallel Process"
+msgstr "Proceso paralelo"
+
+#: data/event_page.glade:929
+msgid "Trigger"
+msgstr "Accionar"
+
+#: data/event_page.glade:999
+msgid "Event commands"
+msgstr "Comandos de Evento"
+
+#: data/graphic.glade:17
+msgid "Normal"
+msgstr ""
+
+#: data/graphic.glade:20
+msgid "Add"
+msgstr ""
+
+#: data/graphic.glade:23
+msgid "Sub"
+msgstr ""
+
+#: data/graphic.glade:137
+#, fuzzy
+msgid "Opacity"
+msgstr "Cambiar Transparencia"
+
+#: data/graphic.glade:179
+#, fuzzy
+msgid "Blending"
+msgstr "Cambiar Renderizado"
+
+#: data/input_number.glade:86
+msgid "Digits"
+msgstr ""
+
+#: data/jump.glade:65 data/jump.glade:132
+msgid "tiles"
+msgstr ""
+
+#: data/jump.glade:81
+msgid "X"
+msgstr ""
+
+#: data/jump.glade:148
+msgid "Y"
+msgstr ""
+
+#: data/main.glade:7
+msgid "_File"
+msgstr "_Archivo"
+
+#: data/main.glade:10
+msgid "_New Project"
+msgstr "_Nuevo Proyecto"
+
+#: data/main.glade:15
+msgid "_Open Project"
+msgstr "_Abrir Proyecto"
+
+#: data/main.glade:20
+msgid "_Save Project"
+msgstr "_Guardar Proyecto"
+
+#: data/main.glade:25
+msgid "_Close Project"
+msgstr "_Cerrar Proyecto"
+
+#: data/main.glade:31
+msgid "_Quit"
+msgstr "_Salir"
+
+#: data/main.glade:39
+msgid "_Edit"
+msgstr "_Editar"
+
+#: data/main.glade:42
+msgid "_Undo"
+msgstr "_Deshacer"
+
+#: data/main.glade:47
+msgid "_Redo"
+msgstr "_Rehacer"
+
+#: data/main.glade:54
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: data/main.glade:59
+msgid "C_ut"
+msgstr "C_ortar"
+
+#: data/main.glade:64
+msgid "_Paste"
+msgstr "_Pegar"
+
+#: data/main.glade:69
+msgid "_Delete"
+msgstr "_Eliminar"
+
+#: data/main.glade:76
+msgid "_View"
+msgstr "_Ver"
+
+#: data/main.glade:79
+msgid "_Current Layer and Below"
+msgstr "_Capa Actual e Inferior"
+
+#: data/main.glade:85
+msgid "_All Layers"
+msgstr "_Todas las Capas"
+
+#: data/main.glade:93
+msgid "_Dim Layers"
+msgstr "_Resaltar Capas"
+
+#: data/main.glade:100
+msgid "_Mode"
+msgstr "_Modo"
+
+#: data/main.glade:103
+msgid "Layer _1"
+msgstr "Capa _1"
+
+#: data/main.glade:109
+msgid "Layer _2"
+msgstr "Capa _2"
+
+#: data/main.glade:115
+msgid "Layer _3"
+msgstr "Capa _3"
+
+#: data/main.glade:123
+msgid "_Events"
+msgstr "_Eventos"
+
+#: data/main.glade:131
+msgid "_Tools"
+msgstr "_Herramientas"
+
+#: data/main.glade:133
+msgid "_Run Game"
+msgstr "_Ejecutar Juego"
+
+#: data/main.glade:138
+msgid "_Database"
+msgstr "_Base de Datos"
+
+#: data/main.glade:143
+msgid "_Script"
+msgstr "_Script"
+
+#: data/main.glade:148
+msgid "So_und Test"
+msgstr "_Probador de Audio"
+
+#: data/main.glade:152
+msgid "R_TP Directory"
+msgstr "D_irectorio del RTP"
+
+#: data/main.glade:156
+msgid "_Open Game Directory"
+msgstr "_Abrir Directorio de Juego"
+
+#: data/main.glade:161
+msgid "_Help"
+msgstr "A_yuda"
+
+#: data/map_properties.glade:122
+msgid "Tileset"
+msgstr ""
+
+#: data/map_properties.glade:168
+msgid "Width"
+msgstr ""
+
+#: data/map_properties.glade:210
+#, fuzzy
+msgid "Height"
+msgstr "Mover hacia la Derecha"
+
+#: data/map_properties.glade:259
+msgid "Encounter step"
+msgstr ""
+
+#: data/map_properties.glade:276
+msgid "BGM"
+msgstr ""
+
+#: data/map_properties.glade:292 data/map_properties.glade:334
+msgid "(None)"
+msgstr ""
+
+#: data/map_properties.glade:318
+msgid "BGS"
+msgstr ""
+
+#: data/map_properties.glade:457
+msgid "Encounters"
+msgstr ""
+
+#: data/move_route.glade:109
+msgid "Repeat"
+msgstr "Repetir"
+
+#: data/move_route.glade:123
+msgid "Skip if move is blocked"
+msgstr "Saltear si el movimiento está bloqueado"
+
+#: data/move_route.glade:170
+msgid "Move Down"
+msgstr "Mover hacia Abajo"
+
+#: data/move_route.glade:179
+msgid "Move Left"
+msgstr "Mover hacia la Izquierda"
+
+#: data/move_route.glade:192
+msgid "Move Right"
+msgstr "Mover hacia la Derecha"
+
+#: data/move_route.glade:205
+msgid "Move Up"
+msgstr "Mover hacia Arriba"
+
+#: data/move_route.glade:218
+msgid "Move Lower Left"
+msgstr "Mover hacia Abajo a la Izquierda"
+
+#: data/move_route.glade:231
+msgid "Move Lower Right"
+msgstr "Mover hacia Abajo a la Derecha"
+
+#: data/move_route.glade:244
+msgid "Move Upper Left"
+msgstr "Mover hacia Arriba a la Izquierda"
+
+#: data/move_route.glade:257
+msgid "Move Upper Right"
+msgstr "Mover hacia Arriba a la Derecha"
+
+#: data/move_route.glade:270
+msgid "Move Random"
+msgstr "Mover al Azar"
+
+#: data/move_route.glade:283
+msgid "Move toward Player"
+msgstr "Mover hacia el Jugador"
+
+#: data/move_route.glade:296
+msgid "Move away from Player"
+msgstr "Alejarse del Jugador"
+
+#: data/move_route.glade:309
+msgid "Step Forward"
+msgstr "Paso hacia Adelenta"
+
+#: data/move_route.glade:322
+msgid "Step Backward"
+msgstr "Paso hacia Atrás"
+
+#: data/move_route.glade:335
+msgid "Jump"
+msgstr "Saltar"
+
+#: data/move_route.glade:361
+msgid "Turn Down"
+msgstr "Mirar hacia Abajo"
+
+#: data/move_route.glade:374
+msgid "Turn Left"
+msgstr "Mirar hacia la Izquierda"
+
+#: data/move_route.glade:389
+msgid "Turn Right"
+msgstr "Mirar hacia la Derecha"
+
+#: data/move_route.glade:404
+msgid "Turn Up"
+msgstr "Mirar hacia Arriba"
+
+#: data/move_route.glade:419
+msgid "Turn 90° Right"
+msgstr "Girar 90° a la Derecha"
+
+#: data/move_route.glade:434
+msgid "Turn 90° Left"
+msgstr "Girar 90° a la Izquierda"
+
+#: data/move_route.glade:449
+msgid "Turn 180°"
+msgstr "Girar 180°"
+
+#: data/move_route.glade:464
+msgid "Turn 90° Right or Left"
+msgstr "Girar 90° al Azar"
+
+#: data/move_route.glade:479
+msgid "Turn Random"
+msgstr "Mirar al Azar"
+
+#: data/move_route.glade:494
+msgid "Turn toward Player"
+msgstr "Mirar hacia el Jugador"
+
+#: data/move_route.glade:509
+msgid "Turn away from Player"
+msgstr "Mirar opuesto al Jugador"
+
+#: data/move_route.glade:524
+msgid "Switch ON"
+msgstr "Encender Interruptor"
+
+#: data/move_route.glade:539
+msgid "Switch OFF"
+msgstr "Apagar Interruptor"
+
+#: data/move_route.glade:554
+msgid "Change Speed"
+msgstr "Cambiar Velocidad"
+
+#: data/move_route.glade:569
+msgid "Change Frequency"
+msgstr "Cambiar Frecuencia"
+
+#: data/move_route.glade:614
+msgid "Change Blending"
+msgstr "Cambiar Renderizado"
+
+#: data/move_route.glade:629
+msgid "Change Opacity"
+msgstr "Cambiar Transparencia"
+
+#: data/move_route.glade:644
+msgid "Change Graphic"
+msgstr "Cambiar Gráfico"
+
+#: data/move_route.glade:659
+msgid "Always on Top OFF"
+msgstr "Apagar Siempre Arriba"
+
+#: data/move_route.glade:674
+msgid "Always on Top ON"
+msgstr "Encender Siempre Arriba"
+
+#: data/move_route.glade:689
+msgid "Through OFF"
+msgstr "Apagar Traspasar"
+
+#: data/move_route.glade:704
+msgid "Through ON"
+msgstr "Encender Traspasar"
+
+#: data/move_route.glade:719
+msgid "Direction Fix OFF"
+msgstr "Apagar Dirección Fija"
+
+#: data/move_route.glade:734
+msgid "Direction Fix ON"
+msgstr "Encender Dirección Fija"
+
+#: data/move_route.glade:749
+msgid "Stop Animation OFF"
+msgstr "Apagar Animar al estar Quieto"
+
+#: data/move_route.glade:764
+msgid "Stop Animation ON"
+msgstr "Encender Animar al estar Quieto"
+
+#: data/move_route.glade:779
+msgid "Move Animation OFF"
+msgstr "Apagar Animar al Moverse"
+
+#: data/move_route.glade:794
+msgid "Move Animation ON"
+msgstr "Encender Animar al Moverse"
+
+#: data/show_choices.glade:32
+msgid "Yes"
+msgstr ""
+
+#: data/show_choices.glade:46 data/show_choices.glade:227
+msgid "Choice 1"
+msgstr ""
+
+#: data/show_choices.glade:75
+msgid "No"
+msgstr ""
+
+#: data/show_choices.glade:89 data/show_choices.glade:242
+msgid "Choice 2"
+msgstr ""
+
+#: data/show_choices.glade:131 data/show_choices.glade:257
+msgid "Choice 3"
+msgstr ""
+
+#: data/show_choices.glade:173 data/show_choices.glade:272
+msgid "Choice 4"
+msgstr ""
+
+#: data/show_choices.glade:212
+msgid "Disallow"
+msgstr ""
+
+#: data/show_choices.glade:287
+msgid "Branch"
+msgstr ""
+
+#: data/show_choices.glade:308
+msgid "Cancel option"
+msgstr ""
+
+#: data/wait.glade:60
+msgid "frames <i>(40 frames are a second)</i>"
+msgstr ""
+
+#: data/wait.glade:77
+msgid "Time"
+msgstr ""
