@@ -16,8 +16,8 @@ Ruby, rake and the following gems (including their dependencies):
 - launchy
 - os
 - gettext
-- open5
-They can downloaded running `$ rake deps`
+- open5  
+They be can downloaded running `$ rake deps`
 
 ## Install
 
