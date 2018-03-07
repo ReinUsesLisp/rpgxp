@@ -147,8 +147,12 @@ class MapEdit < MapView
     end
   end
   def on_button_press(ev)
-    return unless $app.has_map?
+    return unless @map
+
+    x, y = @scroll.hadjustment.value, @scroll.vadjustment.value
     self.grab_focus
+    @scroll.hadjustment.value, @scroll.vadjustment.value = x, y
+
     x = ev.x.to_i / TS
     y = ev.y.to_i / TS
     case @mode
@@ -184,7 +188,7 @@ class MapEdit < MapView
     end
   end
   def on_button_release(ev)
-    return unless $app.has_map?
+    return unless @map
     pointer_x = ev.x.to_i / TS
     pointer_y = ev.y.to_i / TS
     case @mode

@@ -71,11 +71,12 @@ class MainApplication < Gtk::Application
   end
   def close_project
     return unless has_project?
-    @builder.get_object("mapinfo-store").clear
-    @builder.get_object("scrolled-map").child.destroy
-    @builder.get_object("scrolled-palette").child.destroy
     @mapedit.destroy
     @palette.destroy
+    @builder.get_object("mapinfo-store").clear
+    # destroy viewports, keep scrolled windows
+    @builder.get_object("scrolled-map").child.destroy
+    @builder.get_object("scrolled-palette").child.destroy
     $project = nil
   end
   def load_project(dir)

@@ -22,24 +22,73 @@ require_relative 'widgets.rb'
 
 class MapView < Gtk::DrawingArea
   attr_accessor :draw_all, :dim, :active_layer, :draw_lines
-  def initialize(viewport)
+  def initialize(scroll)
     super()
-    self.signal_connect("draw") do |widget, cr|
-      on_draw(cr) if @map_id
-      cr.destroy
-    end
-    viewport.add(self)
-  end
-  def map_id=(map_id)
-    @map_id = map_id
-    @map = $project.maps[map_id] || raise("Invalid map #{map_id}")
+
     @draw_all = true
     @dim = false
     @active_layer = 0
     @highlight_events = false
-    self.width_request = @map.width * TS
-    self.height_request = @map.height * TS
+
+    self.signal_connect("draw") do |widget, cr|
+      on_draw(cr) if @map_id
+      cr.destroy
+    end
+
+    @scroll = scroll
+    @scroll.add(self)
+    @hadjustment = @scroll.hadjustment
+    @vadjustment = @scroll.vadjustment
+  end
+  def map_id=(map_id)
+    # Disconnect previous signals if map is being changed
+    disconnect_scroll if @map
+
+    @map_id = map_id
+    @map = $project.maps[map_id]
+    @info = $project.mapinfos[map_id]
+    if @map.nil? || @info.nil?
+      raise("Invalid map #{map_id}")
+    end
+
+    self.width_request = self.width
+    self.height_request = self.height
     self.queue_draw
+
+    # This data uses to behave different, but as long as it's used with this
+    # editor it should be fine
+    @hadjustment.upper = self.width
+    @vadjustment.upper = self.height
+    @hadjustment.value = @info.scroll_x
+    @vadjustment.value = @info.scroll_y
+    connect_scroll 
+  end
+  def destroy
+    disconnect_scroll
+    super
+  end
+  def tileset
+    id = @map.tileset_id
+    $project.tilesets[id]
+  end
+  def width
+    @map.width * TS
+  end
+  def height
+    @map.height * TS
+  end
+  protected
+  def connect_scroll
+    @signal_x = @hadjustment.signal_connect("value-changed") do |adj|
+      @info.scroll_x = adj.value.to_i if @info
+    end
+    @signal_y = @vadjustment.signal_connect("value-changed") do |adj|
+      @info.scroll_y = adj.value.to_i if @info
+    end
+  end
+  def disconnect_scroll
+    @hadjustment.signal_handler_disconnect(@signal_x)
+    @vadjustment.signal_handler_disconnect(@signal_y)
   end
   def on_draw(cr)
     cr.set_source_rgb(0.5, 0.5, 0.5)
@@ -193,15 +242,5 @@ class MapView < Gtk::DrawingArea
     pattern.matrix = matrix
     cr.rectangle(dest_x, dest_y, width, height)
     cr.fill
-  end
-  def tileset
-    id = @map.tileset_id
-    $project.tilesets[id]
-  end
-  def width
-    @map.width * TS
-  end
-  def height
-    @map.height * TS
-  end
+  end 
 end
