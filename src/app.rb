@@ -25,9 +25,63 @@ require_relative 'database.rb'
 require_relative 'rtp.rb'
 require_relative 'new_project.rb'
 
+class ApplicationWindow < Gtk::ApplicationWindow
+  def initialize(app, builder)
+    super(app)
+    self.title = "RPGXP"
+    self.add(builder.get_object("widget"))
+    @paned = builder.get_object("left-paned")
+    connect_store
+    restore
+    self.show_all
+  end
+  def restore
+    path = File.expand_path(GLib.application_name, GLib.user_cache_dir)
+    file = GLib::KeyFile.new
+    file.load_from_file(File.expand_path("state.ini", path))
+    
+    width = file.get_integer("WindowState", "Width")
+    height = file.get_integer("WindowState", "Height")
+    maximize = file.get_boolean("WindowState", "Maximized")
+    paned_position = file.get_integer("WindowState", "PanedPosition")
+  rescue
+    width = 900
+    height = 550
+    maximize = false
+    paned_position = 300
+  ensure
+    self.resize(width, height)
+    self.maximize if maximize
+    @paned.position = paned_position
+  end
+  def connect_store
+    self.signal_connect("size-allocate") do
+      @width, @height = self.size
+    end
+    self.signal_connect("window-state-event") do |w, event|
+      state = event.new_window_state
+      @maximized = (state == :maximized)
+    end
+    self.signal_connect("destroy") do
+      file = GLib::KeyFile.new
+      file.set_integer("WindowState", "Width", @width)
+      file.set_integer("WindowState", "Height", @height)
+      file.set_boolean("WindowState", "Maximized", @maximized)
+      # querying while destroying is not safe, but I can't find paned's signal
+      file.set_integer("WindowState", "PanedPosition", @paned.position)
+      path = File.expand_path(GLib.application_name, GLib.user_cache_dir)
+      begin
+        FileUtils.mkdir_p(path)
+        IO.write(File.expand_path("state.ini", path), file.to_data)
+      rescue Errno::EACCES
+      end
+    end
+  end
+end
+
 class MainApplication < Gtk::Application
   def initialize
-    super("org.rpgxp", :flags_none)
+    super("com.github." + $PROJECT_NAME, :flags_none)
     self.signal_connect("startup") { on_startup }
     self.signal_connect("activate") { on_activate }
   end
@@ -43,15 +97,7 @@ class MainApplication < Gtk::Application
     add_check_action("dim")
   end
   def on_activate
-    @window = Gtk::ApplicationWindow.new(self)
-    @window.title = "RPGXP"
-    @window.default_width = 900
-    @window.default_height = 550
-    @window.add(@builder.get_object("widget"))    
-    @window.show_all
-  end
-  def on_free
-    free_project_dialog(@window)
+    @window = ApplicationWindow.new(self, @builder)
   end
   def on_new
     NewProjectDialog.call(@window)
@@ -125,9 +171,7 @@ class MainApplication < Gtk::Application
     return unless has_project?
     save_project
 
-    ENV["LIBGL_ALWAYS_SOFTWARE"] = "1"
     bin = "#{$project.dir}/mkxp_linux"
-
     Open3.popen3(bin, "debug") do |stdin, stdout, stderr, thread|
       thread.join
       

@@ -9,17 +9,17 @@
         <item>
           <attribute name="label" translatable="yes">_New Project</attribute>
           <attribute name="action">app.new</attribute>
-	  <attribute name="accel">&lt;Primary&gt;N</attribute>
+          <attribute name="accel">&lt;Primary&gt;N</attribute>
         </item> 
         <item>
           <attribute name="label" translatable="yes">_Open Project</attribute>
           <attribute name="action">app.open</attribute>
-	  <attribute name="accel">&lt;Primary&gt;O</attribute>
+          <attribute name="accel">&lt;Primary&gt;O</attribute>
         </item>
         <item>
           <attribute name="label" translatable="yes">_Save Project</attribute>
           <attribute name="action">app.save</attribute>
-	  <attribute name="accel">&lt;Primary&gt;S</attribute>
+          <attribute name="accel">&lt;Primary&gt;S</attribute>
         </item>
         <item>
           <attribute name="label" translatable="yes">_Close Project</attribute>
@@ -31,7 +31,7 @@
           <attribute name="label" translatable="yes">_Quit</attribute>
           <attribute name="hidden-when">macos-menubar</attribute>
           <attribute name="action">app.quit</attribute>
-	  <attribute name="accel">&lt;Primary&gt;Q</attribute>
+          <attribute name="accel">&lt;Primary&gt;Q</attribute>
         </item>
       </section>
     </submenu>
@@ -39,36 +39,36 @@
       <attribute name="label" translatable="yes">_Edit</attribute>
       <section>
         <item>
-	  <attribute name="label" translatable="yes">_Undo</attribute>
+          <attribute name="label" translatable="yes">_Undo</attribute>
           <attribute name="action">app.undo</attribute>
-	  <attribute name="accel">&lt;Primary&gt;Z</attribute>
+          <attribute name="accel">&lt;Primary&gt;Z</attribute>
         </item>
         <item>
-	  <attribute name="label" translatable="yes">_Redo</attribute>
+          <attribute name="label" translatable="yes">_Redo</attribute>
           <attribute name="action">app.redo</attribute>
-	  <attribute name="accel">&lt;Primary&gt;Y</attribute>
+          <attribute name="accel">&lt;Primary&gt;Y</attribute>
         </item>
       </section>
       <section>
         <item>
-	  <attribute name="label" translatable="yes">_Copy</attribute>
+          <attribute name="label" translatable="yes">_Copy</attribute>
           <attribute name="action">app.copy</attribute>
-	  <attribute name="accel">&lt;Primary&gt;C</attribute>
+          <attribute name="accel">&lt;Primary&gt;C</attribute>
         </item>
         <item>
-	  <attribute name="label" translatable="yes">C_ut</attribute>
+          <attribute name="label" translatable="yes">C_ut</attribute>
           <attribute name="action">app.cut</attribute>
-	  <attribute name="accel">&lt;Primary&gt;X</attribute>
+          <attribute name="accel">&lt;Primary&gt;X</attribute>
         </item>
         <item>
-	  <attribute name="label" translatable="yes">_Paste</attribute>
+          <attribute name="label" translatable="yes">_Paste</attribute>
           <attribute name="action">app.paste</attribute>
-	  <attribute name="accel">&lt;Primary&gt;V</attribute>
+          <attribute name="accel">&lt;Primary&gt;V</attribute>
         </item>
         <item>
-	  <attribute name="label" translatable="yes">_Delete</attribute>
+          <attribute name="label" translatable="yes">_Delete</attribute>
           <attribute name="action">app.delete</attribute>
-	  <attribute name="accel">Delete</attribute>
+          <attribute name="accel">Delete</attribute>
         </item>
       </section>
     </submenu>
@@ -76,10 +76,10 @@
       <attribute name="label" translatable="yes">_View</attribute>
       <section>
         <item>
-	  <attribute name="label" translatable="yes">_Current Layer and Below</attribute>
+          <attribute name="label" translatable="yes">_Current Layer and Below</attribute>
           <attribute name="action">app.layerview</attribute>
           <attribute name="target">below</attribute>
-	  <attribute name="accel">F2</attribute>
+          <attribute name="accel">F2</attribute>
         </item>
         <item>
 	  <attribute name="label" translatable="yes">_All Layers</attribute>
@@ -175,9 +175,10 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkVPaned" id="vpaned1">
+          <object class="GtkPaned" id="left-paned">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolled-palette">
                 <property name="width_request">256</property>
