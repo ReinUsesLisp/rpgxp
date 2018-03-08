@@ -40,6 +40,9 @@ task :install do
   end
   # copy system files
   sh "cp -r data/system #{datadir}"
+  # install desktop
+  sh "mkdir -p #{prefix}/share/applications"
+  sh "install -c -m 644 data/rpgxp.desktop #{prefix}/share/applications"
   # install locale
   for lang in Languages
     msgdir = "#{localedir}/#{lang}/LC_MESSAGES"
