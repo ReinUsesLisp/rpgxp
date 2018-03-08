@@ -3,7 +3,7 @@ DefaultPrefix = "/usr/local"
 
 Languages = %w(es)
 SrcFiles = Dir["src/*.rb"]
-GladeFiles = Dir["data/*.glade"]
+GladeFiles = Dir["data/ui/*.glade"]
 
 task :default do
   Rake::Task[:mo].invoke
@@ -34,9 +34,9 @@ task :install do
     sh "install -c #{src} #{srcdir}"
   end
   # install glade files
-  sh "mkdir -p #{datadir}"
+  sh "mkdir -p #{datadir}/ui"
   for file in GladeFiles
-    sh "install -c -m 644 #{file} #{datadir}"
+    sh "install -c -m 644 #{file} #{datadir}/ui"
   end
   # copy system files
   sh "cp -r data/system #{datadir}"
@@ -97,7 +97,7 @@ def datadir
 end
 
 def localedir
-  "#{prefix}/locale"
+  "#{prefix}/share/locale"
 end
 
 def mo_file(lang)

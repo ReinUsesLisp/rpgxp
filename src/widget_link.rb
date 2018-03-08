@@ -132,7 +132,7 @@ class ExtraBuilder < Gtk::Builder
   TRANSLATABLE = 'translatable="yes"'
   def initialize(path)
     super()
-    data = IO.read("#{$DATA_DIR}/#{path}.glade")
+    data = IO.read("#{$DATA_DIR}/ui/#{path}.glade")
 
     while (floor = data.index(TRANSLATABLE))
       data[floor...floor+TRANSLATABLE.length] = ""
@@ -150,8 +150,7 @@ class ExtraBuilder < Gtk::Builder
     if object
       object
     else
-      puts("Object \"#{name}\" not found in builder")
-      nil
+      raise("Object \"#{name}\" not found in builder")
     end
   end
 end
