@@ -157,7 +157,8 @@ class MainApplication < Gtk::Application
     dialog.destroy
   end
   def on_quit
-    $app.quit
+    @window.destroy
+    self.quit
   end
   def on_scripts
     return unless has_project?
