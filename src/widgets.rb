@@ -116,3 +116,28 @@ class Cairo::Context
     draw_selection_square(x*size_x, y*size_y, width*size_x, height*size_y)
   end
 end
+
+class ExtraKeyFile < GLib::KeyFile
+  def initialize(file = nil)
+    super()
+    if file && File.exists?(file)
+      data = IO.read(file)
+      data.gsub!("\r\n", "\n")
+      self.load_from_data(data)
+    end
+  end
+  def self.define_getter(function)
+    define_method(function) do |section, key, default = nil|
+      if self.has_group?(section) && self.has_key?(section, key)
+        super(section, key)
+      else
+        default
+      end
+    end
+  end
+  define_getter :get_value
+  define_getter :get_string
+  define_getter :get_integer
+  define_getter :get_integer_list
+end
+

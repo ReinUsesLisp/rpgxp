@@ -55,8 +55,7 @@ module Resource
   end
   def self.path_list(type)
     magic = FileMagic.new(FileMagic::MAGIC_MIME)
-    rtp = $project.rtp
-    dirs = rtp.empty? ? [$project.dir] : [$project.dir, rtp]
+    dirs = [$project.dir] + $project.config.rtps
     resources = []
     for dir in dirs
       for file in Dir["#{dir}/#{dir(type)}/*"]

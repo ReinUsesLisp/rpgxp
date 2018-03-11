@@ -22,8 +22,8 @@ require_relative 'map_edit.rb'
 require_relative 'tileset_view.rb'
 require_relative 'mapinfo_bind.rb'
 require_relative 'database.rb'
-require_relative 'rtp.rb'
 require_relative 'new_project.rb'
+require_relative 'config.rb'
 
 class ApplicationWindow < Gtk::ApplicationWindow
   def initialize(app, builder)
@@ -69,12 +69,14 @@ class ApplicationWindow < Gtk::ApplicationWindow
       file.set_boolean("WindowState", "Maximized", @maximized)
       # querying while destroying is not safe, but I can't find paned's signal
       file.set_integer("WindowState", "PanedPosition", @paned.position)
-      path = File.expand_path(GLib.application_name, GLib.user_cache_dir)
       begin
-        FileUtils.mkdir_p(path)
-        IO.write(File.expand_path("state.ini", path), file.to_data)
+        dir = File.expand_path(GLib.application_name, GLib.user_cache_dir)
+        FileUtils.mkdir_p(dir)
+        IO.write(File.expand_path("state.ini", dir), file.to_data)
       rescue Errno::EACCES
       end
+      # FIXME move to application close
+      $config.save
     end
   end
 end
@@ -86,12 +88,15 @@ class MainApplication < Gtk::Application
     self.signal_connect("activate") { on_activate }
   end
   def on_startup
+    $config = Configuration.new
+
     @builder = ExtraBuilder.new("main")
+    self.set_app_menu(@builder.get_object("appmenu"))
     self.set_menubar(@builder.get_object("menubar"))
     
-    add_simple_actions("open", "save", "close", "run", "quit", "undo",
-                       "redo", "copy", "cut", "paste", "delete", "scripts",
-                       "database", "rtp")
+    add_simple_actions("open", "save", "close", "run", "quit",
+                       #"undo", "redo", "copy", "cut", "paste",
+                       "delete", "scripts", "database")
     add_radio_action("layerview", "all")
     add_radio_action("layeredit", "layer1")
     add_check_action("dim")
@@ -146,8 +151,13 @@ class MainApplication < Gtk::Application
     @palette.tileset = $project.tilesets[@map.tileset_id]
   end
   def on_open
+    filter = Gtk::FileFilter.new
+    filter.add_pattern("*.rxproj")
+    filter.add_pattern("*.xproj")
+    filter.name = "XP Project"
+    
     dialog = Gtk::FileChooserDialog.new(title: "Open Project", parent: @window)
-    dialog.action = :select_folder
+    dialog.add_filter(filter)
     dialog.add_button(Gtk::Stock::CANCEL, :cancel)
     open = dialog.add_button(Gtk::Stock::OPEN, :ok)
     open.style_context.add_class("suggested-action")

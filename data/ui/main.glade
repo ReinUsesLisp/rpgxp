@@ -2,6 +2,17 @@
 <!-- Generated with glade 3.20.2 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
+  <menu id="appmenu">
+    <item>
+      <attribute name="label" translatable="yes">_Preferences</attribute>
+      <attribute name="action">app.preferences</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">_Quit</attribute>
+      <attribute name="action">app.quit</attribute>
+      <attribute name="accel">&lt;Primary&gt;Q</attribute>
+    </item>
+  </menu>
   <menu id="menubar">
     <submenu>
       <attribute name="label" translatable="yes">_File</attribute>
@@ -24,14 +35,6 @@
         <item>
           <attribute name="label" translatable="yes">_Close Project</attribute>
           <attribute name="action">app.close</attribute>
-        </item>
-      </section>
-      <section>
-        <item>
-          <attribute name="label" translatable="yes">_Quit</attribute>
-          <attribute name="hidden-when">macos-menubar</attribute>
-          <attribute name="action">app.quit</attribute>
-          <attribute name="accel">&lt;Primary&gt;Q</attribute>
         </item>
       </section>
     </submenu>
@@ -147,10 +150,6 @@
       <item>
 	<attribute name="label" translatable="yes">So_und Test</attribute>
 	<attribute name="action">app.audio</attribute>
-      </item>
-      <item>
-	<attribute name="label" translatable="yes">R_TP Directory</attribute>
-	<attribute name="action">app.rtp</attribute>
       </item>
       <item>
 	<attribute name="label" translatable="yes">_Open Game Directory</attribute>

@@ -18,6 +18,7 @@ require 'zlib'
 require 'scanf'
 require_relative 'widget_link.rb'
 require_relative 'convert.rb'
+require_relative 'xproj.rb'
 
 # FIXME move somewhere else
 TILE_SIZE = 32
@@ -30,12 +31,19 @@ class Project
   attr_accessor :actors, :animations, :armors, :classes, :common_events,
                 :enemies, :items, :mapinfos, :scripts, :skills, :states,
                 :system, :tilesets, :troops, :weapons, :maps
-  attr_reader :dir, :rtp
-  def has_conf?
-    File.exists?("#{dir}/mkxp.conf")
-  end
-  def initialize(dir)
-    @dir = dir
+  attr_reader :dir, :config
+  def initialize(file)
+    @dir = File.dirname(file)
+    case File.extname(file)
+    when ".xproj"
+      @config = read_marshal(file)
+    when ".rxproj"
+      @config = XProj.new
+      name = File.basename(file, ".rxproj")
+      @config.load_ini(File.expand_path("#{name}.ini", dir))
+    else
+      raise("Invalid Project extension")
+    end
     data = "#{dir}/Data"
     @actors = read_marshal("#{data}/Actors.rxdata")
     @animations = read_marshal("#{data}/Animations.rxdata")
@@ -57,22 +65,6 @@ class Project
       @maps[map_id] = read_marshal(sprintf("#{data}/Map%03d.rxdata", map_id))
     end
     try_export_scripts
-
-    if has_conf?
-      @rtp = slow_read_rtp
-    else
-      for file in %w(mkxp_linux GMGSx.sf2 mkxp.conf)
-        FileUtils.cp("#{$DATA_DIR}/system/#{file}", dir)
-      end
-      FileUtils.chmod(0755, "#{dir}/mkxp_linux")
-
-      dialog = rtp_choose_dialog(nil, "RTP Directory")
-      if dialog.run == :ok
-        @rtp = dialog.filename
-        self.rtp = @rtp
-      end
-      dialog.destroy
-    end
   end
   def save
     # load script files into memory, then save it as .rxdata
@@ -97,6 +89,10 @@ class Project
     @mapinfos.each do |map_id, info|
       write_marshal(@maps[map_id], sprintf("#{data}/Map%03d.rxdata", map_id))
     end
+    # save metadata
+    @config.save(dir)
+    @config.export_ini(dir)
+    @config.export_conf(dir)
   end
   def try_export_scripts
     export_scripts unless has_scripts?
@@ -153,46 +149,6 @@ class Project
   end
   def scripts_dir
     "#{dir}/Scripts"
-  end
-  def slow_read_rtp
-    conf_read("RTP")
-  end
-  def rtp=(rtp_dir)
-    conf_write("RTP", rtp_dir)
-  end
-  def title=(title)
-    conf_write("windowTitle", title)
-  end
-  def title
-    conf_read("windowTitle")
-  end
-  protected
-  def conf
-    return IO.read("#{dir}/mkxp.conf").lines.map { |line| line.strip }
-  rescue
-    return []
-  end
-  def conf=(lines)
-    IO.write("#{dir}/mkxp.conf", lines.join("\n"))
-  end
-  def conf_index(id)
-    self.conf.find_index do |line|
-      line[0...id.length] == id
-    end
-  end
-  def conf_read(id)
-    index = conf_index(id)
-    index ? conf[index][(id.length+1)..-1] : ""
-  end
-  def conf_write(id, value)
-    lines = self.conf
-    index = conf_index(id)
-    if index
-      lines[index][id.length+1..-1] = value
-    else
-      lines.push("#{id}=#{value}")
-    end
-    self.conf = lines
   end
 end
 
