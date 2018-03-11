@@ -4,5 +4,6 @@ Encoding=UTF-8
 Name=RPGXP
 Comment=A Role-playing game creation software
 Terminal=false
+StartupNotify=true
 Exec=rpgxp %f
 

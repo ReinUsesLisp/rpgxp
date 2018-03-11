@@ -83,9 +83,25 @@ end
 
 class MainApplication < Gtk::Application
   def initialize
-    super("com.github." + $PROJECT_NAME, :flags_none)
+    super("com.github." + $PROJECT_NAME, [:handles_open, :non_unique])
     self.signal_connect("startup") { on_startup }
     self.signal_connect("activate") { on_activate }
+    self.signal_connect("open") { |app, files|
+      activate
+      begin
+        # TODO ask for project to open when they are many (>1)
+        path = files[0].path
+        load_project(path)
+      rescue => ex
+        msg = "Error loading Project"
+        dialog = Gtk::MessageDialog.new(parent: @window, type: :error,
+                                        buttons: :close, message: msg)
+        dialog.secondary_text = ex.message
+        dialog.run
+        dialog.destroy
+        self.quit
+      end
+    }
   end
   def on_startup
     $config = Configuration.new
@@ -101,8 +117,11 @@ class MainApplication < Gtk::Application
     add_radio_action("layeredit", "layer1")
     add_check_action("dim")
   end
-  def on_activate
+  def activate
     @window = ApplicationWindow.new(self, @builder)
+  end
+  def on_activate
+    activate
   end
   def on_new
     NewProjectDialog.call(@window)
@@ -130,9 +149,9 @@ class MainApplication < Gtk::Application
     @builder.get_object("scrolled-palette").child.destroy
     $project = nil
   end
-  def load_project(dir)
+  def load_project(path)
     close_project if has_project?
-    $project = Project.new(dir)
+    $project = Project.new(path)
     MapInfosBind.new(@builder.get_object("mapinfo-tv"),
                      @builder.get_object("mapinfo-store"))
     @mapedit = MapEdit.new(@builder.get_object("scrolled-map"))
