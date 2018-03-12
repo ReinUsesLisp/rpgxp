@@ -21,26 +21,44 @@ module Resource
   AudioMime = ["audio/midi", "audio/ogg", "audio/mp3", "audio/wav", "audio/wma"]
   ImageMime = ["image/png", "image/jpeg"]
   @cache = {}
+  @ignores = []
+  @always_ignore = false
   def self.load(type, name)
     raise("Invalid type #{type} for image.") if subtype(type) != :image
     raise("Empty name. Write a guard instead.") if name.empty?
-    @cache[[type, name]] ||= Cairo::ImageSurface.from_png(find(type, name))
+    res = find(type, name)
+    if res
+      @cache[[type, name]] ||= Cairo::ImageSurface.from_png(res)
+    else
+      # Return empty resource
+      Cairo::ImageSurface.new(1, 1)
+    end
   end
   def self.find(type, name)
     res = find_low(type, name)
-    until res
-      msg = "Resource \"#{name}\" not found. What do you want to do?"
-      ask = Gtk::MessageDialog.new(message: msg, buttons_type: :none)
+    key = [type, name]
+    if res.nil? && !@always_ignore && !@ignores.member?(key)
+      msg = "#{type.capitalize} \"#{name}\" not found."
+      ask = Gtk::MessageDialog.new(buttons_type: :none, type: :error,
+                                   message: msg)
+      ask.secondary_text = "What do you want to do?"
       ask.add_button("Exit Application", 1)
       ask.add_button("Retry", 2)
-      
+      ask.add_button("Ignore All", 3)
+      ignore = ask.add_button("Ignore", 4)
+      ignore.style_context.add_class("suggested-action")
+
       answer = ask.run
       ask.destroy
       case answer
       when 1
-        exit(1)
+	$app.quit
       when 2
-        res = find_low(type, name)
+        res = find(type, name)
+      when 3
+        @always_ignore = true
+      when 4
+        @ignores.push(key)
       end
     end
     res
