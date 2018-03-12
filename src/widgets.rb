@@ -74,7 +74,7 @@ class DialogEditorTemplate < Gtk::Dialog
 end
 
 def big_widget(widget, screen, width = nil, height = nil)
-  if screen.height < 800 || true # forcing
+  if screen.height < 800
     scrolled = Gtk::ScrolledWindow.new
     scrolled.add_with_viewport(widget)
     scrolled.vscrollbar_policy = :automatic
