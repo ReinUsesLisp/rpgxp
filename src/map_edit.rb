@@ -153,8 +153,8 @@ class MapEdit < MapView
     self.grab_focus
     @scroll.hadjustment.value, @scroll.vadjustment.value = x, y
 
-    x = ev.x.to_i / TS
-    y = ev.y.to_i / TS
+    x = inv_scale(ev.x.to_i) / TS
+    y = inv_scale(ev.y.to_i) / TS
     case @mode
     when :tile
       if 1 == ev.button && $selection
@@ -189,8 +189,8 @@ class MapEdit < MapView
   end
   def on_button_release(ev)
     return unless @map
-    pointer_x = ev.x.to_i / TS
-    pointer_y = ev.y.to_i / TS
+    pointer_x = inv_scale(ev.x.to_i) / TS
+    pointer_y = inv_scale(ev.y.to_i) / TS
     case @mode
     when :tile
       if 3 == ev.button
@@ -272,8 +272,8 @@ class MapEdit < MapView
   def on_motion(ev)
     case @mode
     when :tile
-      x = ev.x.to_i / TS
-      y = ev.y.to_i / TS
+      x = inv_scale(ev.x.to_i) / TS
+      y = inv_scale(ev.y.to_i) / TS
       if @pointer_x != x || @pointer_y != y
         old_x = @pointer_x
         old_y = @pointer_y

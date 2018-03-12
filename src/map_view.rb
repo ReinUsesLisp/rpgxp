@@ -22,9 +22,11 @@ require_relative 'widgets.rb'
 
 class MapView < Gtk::DrawingArea
   attr_accessor :draw_all, :dim, :active_layer, :draw_lines
+  attr_reader :scale_index
   def initialize(scroll)
     super()
 
+    @scale_index = 0
     @draw_all = true
     @dim = false
     @active_layer = 0
@@ -34,11 +36,42 @@ class MapView < Gtk::DrawingArea
       on_draw(cr) if @map_id
       cr.destroy
     end
+    
+    scroll.signal_connect("scroll-event") do |w, event|
+      if event.state.control_mask?
+        self.scale_index -= event.delta_y.to_i
+        # Inhibit other signals
+        true
+      else
+        false
+      end
+    end
 
     @scroll = scroll
     @scroll.add(self)
     @hadjustment = @scroll.hadjustment
     @vadjustment = @scroll.vadjustment
+  end
+  SCALE_STEPS = {  0 => 1.0,
+                  -3 => 0.125, -2 => 0.25, -1 => 0.5,
+                   1 => 2.0,    2 => 4.0,   3 => 8.0 }
+  def scale_index=(scale_index)
+    @scale_index = scale_index
+    refresh_limits
+  end
+  def refresh_limits
+    self.width_request = scale(self.width)
+    self.height_request = scale(self.height)
+    self.queue_draw
+
+    # This data uses to behave different, but as long as it's used with this
+    # editor it should be fine
+    @hadjustment.upper = scale(self.width)
+    @vadjustment.upper = scale(self.height)
+    @hadjustment.value = scale(@info.scroll_x)
+    @vadjustment.value = scale(@info.scroll_y)
+    
+    self.queue_draw
   end
   def map_id=(map_id)
     # Disconnect previous signals if map is being changed
@@ -50,17 +83,7 @@ class MapView < Gtk::DrawingArea
     if @map.nil? || @info.nil?
       raise("Invalid map #{map_id}")
     end
-
-    self.width_request = self.width
-    self.height_request = self.height
-    self.queue_draw
-
-    # This data uses to behave different, but as long as it's used with this
-    # editor it should be fine
-    @hadjustment.upper = self.width
-    @vadjustment.upper = self.height
-    @hadjustment.value = @info.scroll_x
-    @vadjustment.value = @info.scroll_y
+    refresh_limits
     connect_scroll 
   end
   def destroy
@@ -77,6 +100,16 @@ class MapView < Gtk::DrawingArea
   def height
     @map.height * TS
   end
+  def scale(number = nil)
+    scale = SCALE_STEPS[clamp(@scale_index, -3, 3)]
+    number ? (scale * number).to_i : scale
+  end
+  def inv_scale(number)
+    (number / scale).to_i
+  end
+  def queue_draw_area(x, y, width, height)
+    super(scale(x), scale(y), scale(width), scale(height))
+  end
   protected
   def connect_scroll
     @signal_x = @hadjustment.signal_connect("value-changed") do |adj|
@@ -91,6 +124,7 @@ class MapView < Gtk::DrawingArea
     @vadjustment.signal_handler_disconnect(@signal_y)
   end
   def on_draw(cr)
+    cr.scale(scale, scale)
     cr.set_source_rgb(0.5, 0.5, 0.5)
     cr.paint
     cr.rectangle(0.0, 0.0, width.to_f, height.to_f)
