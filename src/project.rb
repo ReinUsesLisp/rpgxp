@@ -369,6 +369,18 @@ class Color
   end
 end
 
+class Tone
+  attr_accessor :red, :green, :blue, :gray
+  def _dump(level)
+    [@red, @green, @blue, @gray].pack('EEEE')
+  end
+  def self._load(args)
+    tone = new
+    tone.red, tone.green, tone.blue, tone.gray = args.unpack('EEEE')
+    tone
+  end
+end
+
 class Table
   attr_accessor :dims, :width, :height, :depth, :size, :data
   def initialize(width, height = 1, depth = 1, dims = nil)
