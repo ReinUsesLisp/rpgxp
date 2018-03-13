@@ -6,8 +6,17 @@ SrcFiles = Dir["src/*.rb"]
 GladeFiles = Dir["data/ui/*.glade"]
 
 task :default do
+  FileUtils.mkdir_p("data/system")
+
+  do_fatal_checks
+  check_file_ask_readme("data/system/GMGSx.sf2")
+
   Rake::Task[:mo].invoke
   Rake::Task[:executable].invoke
+end
+
+def do_fatal_checks
+  check_file_ask_readme("data/system/mkxp_linux", true)
 end
 
 task :deps do
@@ -25,7 +34,7 @@ task :clean do
 end
 
 task :install do
-  Rake::Task[:default].invoke
+  do_fatal_checks
   # install binary
   sh "install #{executable} #{bindir}"
   # install ruby files in lib/
@@ -128,5 +137,20 @@ end
 def gem_install(gem, name = nil)
   name = gem unless name
   Gem.install(gem) unless has_require?(name)
+end
+
+def check_file_ask_readme(file, fatal = true)
+  if File.exists?(file)
+    true
+  else
+    dir = File.dirname(file)
+    name = File.basename(file)
+    severity = fatal ? "ERROR" : "WARNING"
+    STDERR.puts("#{severity}: There is no #{name} in #{dir}. Read README.md")
+    if fatal
+      exit!(1)
+    end
+    false
+  end
 end
 
