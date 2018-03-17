@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # This file is part of RPGXP.
 #
@@ -154,7 +155,14 @@ end
 
 module RPG
   class Actor
-    attr_accessor :name
+    attr_accessor :id, :parameters
+    extend WidgetLinkObject
+    alink "name"
+    alink "class_id", :minus_one, :plus_one
+    alink "initial_level"
+    alink "final_level"
+    alink "exp_basis", :to_float, :to_integer
+    alink "exp_inflation", :to_float, :to_integer
   end
   class Animation
     class Frame
@@ -172,6 +180,7 @@ module RPG
     alink "pitch", :to_float, :to_integer
   end
   class Class
+    attr_accessor :name
     class Learning
     end
   end

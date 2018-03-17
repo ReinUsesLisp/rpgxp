@@ -17,6 +17,21 @@
 require 'gtk3'
 require_relative 'system.rb'
 
+def define_filler(name, getter = nil)
+  getter = name unless getter
+  define_method "fill_with_#{name}" do |list|
+    objects = $project.public_send(getter)
+    for i in 1...objects.length
+      obj = objects[i]
+      list.append.set_value(0, yield(i, obj))
+    end
+  end
+end
+
+define_filler :classes do |index, cclass|
+  cclass.name
+end
+
 def fill_with_tilesets(list)
   tilesets = $project.tilesets
   for i in 1...tilesets.length

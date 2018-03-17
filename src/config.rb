@@ -61,8 +61,9 @@ class Configuration
     end
   end
   def welcome_message
-    msg = "Welcome to RPG XP!\nDo you want to import a standard RTP?"
+    msg = "Welcome to RPG XP!"
     ask = Gtk::MessageDialog.new(message: msg, buttons_type: :none)
+    ask.secondary_text = "Do you want to import a standard RTP?"
     ask.add_button("No", :cancel)
     ok = ask.add_button("Import RTP", :ok)
     ok.style_context.add_class("suggested-action")
