@@ -23,21 +23,24 @@ module Resource
   @cache = {}
   @ignores = []
   @always_ignore = false
-  def self.load(type, name)
+  def self.load(*key)
+    type, name = key
     raise("Invalid type #{type} for image.") if subtype(type) != :image
     raise("Empty name. Write a guard instead.") if name.empty?
-    res = find(type, name)
-    if res
-      @cache[[type, name]] ||= Cairo::ImageSurface.from_png(res)
+    @cache[key] ||= load_resource(find(*key))
+  end
+  def self.load_resource(resource)
+    if resource
+      Cairo::ImageSurface.from_png(resource)
     else
-      # Return empty resource
+      # Return empty surface when resource is nil
       Cairo::ImageSurface.new(1, 1)
     end
   end
   def self.find(type, name)
     res = find_low(type, name)
     key = [type, name]
-    if res.nil? && !@always_ignore && !@ignores.member?(key)
+    if res.nil? && @always_ignore == false && @ignores.member?(key) == false
       msg = "#{type.capitalize} \"#{name}\" not found."
       ask = Gtk::MessageDialog.new(buttons_type: :none, type: :error,
                                    message: msg)
@@ -52,7 +55,7 @@ module Resource
       ask.destroy
       case answer
       when 1
-	$app.quit
+	      $app.quit
       when 2
         res = find(type, name)
       when 3
