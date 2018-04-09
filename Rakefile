@@ -9,7 +9,7 @@ task :default do
   FileUtils.mkdir_p("data/system")
 
   do_fatal_checks
-  check_file_ask_readme("data/system/GMGSx.sf2")
+  check_file_ask_readme("data/system/GMGSx.sf2", false)
 
   Rake::Task[:mo].invoke
   Rake::Task[:executable].invoke
