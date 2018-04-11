@@ -36,6 +36,7 @@ end
 task :install do
   do_fatal_checks
   # install binary
+  sh "mkdir -p #{bindir}"
   sh "install #{executable} #{bindir}"
   # install ruby files in lib/
   sh "mkdir -p #{srcdir}"
