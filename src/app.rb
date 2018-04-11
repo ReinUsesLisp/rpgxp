@@ -132,9 +132,7 @@ class MainApplication < Gtk::Application
   end
   def on_database
     return unless has_project?
-    database = DatabaseDialog.new(@window)
-    database.run
-    database.destroy
+    DatabaseWindow.new
   end
   def on_close
     close_project if has_project?

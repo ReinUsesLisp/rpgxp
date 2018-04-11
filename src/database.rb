@@ -16,17 +16,26 @@
 #
 require 'gtk3'
 
-class DatabaseDialog < Gtk::Dialog
-  def initialize(parent)
-    super(title: "Database", parent: parent, flags: :modal)
-    self.add_button(Gtk::Stock::CANCEL, :cancel)
-    self.add_button(Gtk::Stock::APPLY, :apply)
-    ok = self.add_button(Gtk::Stock::OK, :ok)
+class DatabaseWindow < Gtk::Window
+  def initialize
+    super()
+    self.title = "Database"
+    
+    buttons = Gtk::ButtonBox.new(:horizontal)
+    buttons.layout = :end
+    buttons.spacing = 4
+    cancel = Gtk::Button.new(stock_id: Gtk::Stock::CANCEL)
+    apply = Gtk::Button.new(stock_id: Gtk::Stock::APPLY)
+    ok = Gtk::Button.new(stock_id: Gtk::Stock::OK)
     ok.style_context.add_class("suggested-action")
+    buttons.add(cancel)
+    buttons.add(apply)
+    buttons.add(ok)
 
     notebook = Gtk::Notebook.new
     notebook.tab_pos = :left
     notebook.vexpand = true
+    notebook.scrollable = true
 
     widget = ActorEditor.new
     notebook.append_page(widget, Gtk::Label.new("Actors"))
@@ -43,8 +52,11 @@ class DatabaseDialog < Gtk::Dialog
     not_implemented(notebook, "Tilesets")
     not_implemented(notebook, "Common\nEvents")
     not_implemented(notebook, "System")
-    
-    self.child.add(notebook)
+
+    vbox = Gtk::Box.new(:vertical)
+    vbox.add(notebook)
+    vbox.add(buttons)
+    self.add(vbox)
     self.show_all
   end
   def not_implemented(notebook, name)
