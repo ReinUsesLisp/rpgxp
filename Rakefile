@@ -21,7 +21,6 @@ end
 
 task :deps do
   gem_install("gtk3")
-  gem_install("ruby-filemagic", "filemagic")
   gem_install("launchy")
   gem_install("os")
   gem_install("gettext")

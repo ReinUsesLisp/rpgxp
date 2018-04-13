@@ -15,19 +15,22 @@
 # along with RPGXP.  If not, see <http://www.gnu.org/licenses/>.
 #
 require 'gtk3'
-require 'filemagic'
 
 module Resource
-  AudioMime = ["audio/midi", "audio/ogg", "audio/mp3", "audio/wav", "audio/wma"]
-  ImageMime = ["image/png", "image/jpeg"]
+  AudioExts = %w(.mid .ogg .mp3 .wav .wma)
+  ImageExts = %w(.png .jpg .jpeg)
   @cache = {}
   @ignores = []
   @always_ignore = false
   def self.load(*key)
     type, name = key
-    raise("Invalid type #{type} for image.") if subtype(type) != :image
-    raise("Empty name. Write a guard instead.") if name.empty?
-    @cache[key] ||= load_resource(find(*key))
+    if subtype(type) != :image
+      raise("Invalid type #{type} for image.")
+    elsif name.empty?
+      raise("Empty name. Write a guard instead.")
+    else
+      @cache[key] ||= load_resource(find(*key))
+    end
   end
   def self.load_resource(resource)
     if resource
@@ -55,7 +58,7 @@ module Resource
       ask.destroy
       case answer
       when 1
-	      $app.quit
+        $app.quit
       when 2
         res = find(type, name)
       when 3
@@ -75,17 +78,19 @@ module Resource
     path_list(type).map { |path| File.basename(path, ".*") }.uniq.sort
   end
   def self.path_list(type)
-    magic = FileMagic.new(FileMagic::MAGIC_MIME)
     dirs = [$project.dir] + $project.config.rtps
     resources = []
     for dir in dirs
-      for file in Dir["#{dir}/#{dir(type)}/*"]
-        mime = magic.file(file).split(";")[0]
+      # Windows' Ruby wants Dir[] calls to be in a *nix like format
+      dir_safe = "#{dir}/#{dir(type)}/*".gsub("\\", "/")
+      for file in Dir[dir_safe]
+        ext = File.extname(file).downcase
         case subtype(type)
         when :audio
-          resources.push(file) if AudioMime.member?(mime)
+          resources.push(file) if AudioExts.include?(ext)
         when :image
-          resources.push(file) if ImageMime.member?(mime)
+          puts ext
+          resources.push(file) if ImageExts.include?(ext)
         end
       end
     end
