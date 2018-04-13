@@ -36,27 +36,27 @@ end
 task :install do
   do_fatal_checks
   # install binary
-  sh "mkdir -p #{bindir}"
+  FileUtils.mkdir_p(bindir)
   sh "install #{executable} #{bindir}"
   # install ruby files in lib/
-  sh "mkdir -p #{srcdir}"
+  FileUtils.mkdir_p(srcdir)
   for src in SrcFiles
     sh "install -c #{src} #{srcdir}"
   end
   # install glade files
-  sh "mkdir -p #{datadir}/ui"
+  FileUtils.mkdir_p("{datadir}/ui")
   for file in GladeFiles
     sh "install -c -m 644 #{file} #{datadir}/ui"
   end
   # copy system files
   sh "cp -r data/system #{datadir}"
   # install desktop
-  sh "mkdir -p #{prefix}/share/applications"
+  FileUtils.mkdir_p("#{prefix}/share/applications")
   sh "install -c -m 644 data/rpgxp.desktop #{prefix}/share/applications"
   # install locale
   for lang in Languages
     msgdir = "#{localedir}/#{lang}/LC_MESSAGES"
-    sh "mkdir -p #{msgdir}"
+    FileUtils.mkdir_p(msgdir)
     sh "install -c -m 644 #{mo_file(lang)} #{msgdir}"
   end
 end
@@ -72,19 +72,18 @@ task :executable do
 end
 
 task :pot do
-  files = GladeFiles
-  sh "mkdir -p po"
-  sh "xgettext #{files.join(" ")} -o #{pot_file}"
+  FileUtils.mkdir_p("po")
+  sh "xgettext #{GladeFiles.join(" ")} -o #{pot_file}"
   for lang in Languages
     sh "msgmerge -U #{po_file(lang)} #{pot_file}"
   end
 end
 
 task :mo do
-  sh "mkdir -p locale"
+  FileUtils.mkdir_p("locale")
   for lang in Languages
     msgdir = "locale/#{lang}/LC_MESSAGES"
-    sh "mkdir -p #{msgdir}"
+    FileUtils.mkdir_p(msgdir)
     sh "msgfmt #{po_file(lang)} -o #{msgdir}/#{ProjectName}.mo"
   end
 end
