@@ -36,7 +36,7 @@ class ApplicationWindow < Gtk::ApplicationWindow
     self.show_all
   end
   def restore
-    path = File.expand_path(GLib.application_name, GLib.user_cache_dir)
+    path = File.expand_path($PROJECT_NAME, GLib.user_cache_dir)
     file = GLib::KeyFile.new
     file.load_from_file(File.expand_path("state.ini", path))
     

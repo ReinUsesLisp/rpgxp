@@ -19,7 +19,7 @@ require_relative 'widgets.rb'
 
 class Configuration
   def initialize
-    path = File.expand_path(GLib.application_name, GLib.user_config_dir)
+    path = File.expand_path($PROJECT_NAME, GLib.user_config_dir)
     filepath = File.expand_path("config", path)
     file = ExtraKeyFile.new(filepath)
     @background_color = file.get_integer_list("UI", "BackgroundColor", [255, 255, 255])
@@ -36,7 +36,7 @@ class Configuration
     end
   end
   def save
-    dir = File.expand_path(GLib.application_name, GLib.user_config_dir)
+    dir = File.expand_path($PROJECT_NAME, GLib.user_config_dir)
     file = ExtraKeyFile.new
     file.set_integer_list("UI", "BackgroundColor", @background_color)
     file.set_integer_list("UI", "NoneColor", @none_color)
