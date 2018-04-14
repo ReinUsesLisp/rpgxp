@@ -89,7 +89,6 @@ module Resource
         when :audio
           resources.push(file) if AudioExts.include?(ext)
         when :image
-          puts ext
           resources.push(file) if ImageExts.include?(ext)
         end
       end
