@@ -43,7 +43,7 @@ task :install do
     sh "install -c #{src} #{srcdir}"
   end
   # install glade files
-  FileUtils.mkdir_p("{datadir}/ui")
+  FileUtils.mkdir_p("#{datadir}/ui")
   for file in GladeFiles
     sh "install -c -m 644 #{file} #{datadir}/ui"
   end
