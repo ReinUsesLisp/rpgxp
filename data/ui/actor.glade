@@ -8,6 +8,18 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="weapon_id_list">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="armor_id_list">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkAdjustment" id="exp_basis">
     <property name="lower">10</property>
     <property name="upper">50</property>
@@ -700,10 +712,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="weapon">
+                  <object class="GtkComboBox" id="weapon_id">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
+		    <property name="model">weapon_id_list</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext7"/>
                       <attributes>
@@ -717,10 +730,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="armor1">
+                  <object class="GtkComboBox" id="armor1_id">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
+		    <property name="model">armor_id_list</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext1"/>
                       <attributes>
@@ -734,10 +748,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="armor2">
+                  <object class="GtkComboBox" id="armor2_id">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
+		    <property name="model">armor_id_list</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext2"/>
                       <attributes>
@@ -751,10 +766,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="armor3">
+                  <object class="GtkComboBox" id="armor3_id">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
+		    <property name="model">armor_id_list</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext3"/>
                       <attributes>
@@ -768,10 +784,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="armor4">
+                  <object class="GtkComboBox" id="armor4_id">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
+		    <property name="model">armor_id_list</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext4"/>
                       <attributes>
@@ -798,7 +815,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="shield_fix">
+                  <object class="GtkCheckButton" id="armor1_fix">
                     <property name="label" translatable="yes" comments="As in &quot;You can't change this item&quot;">Fix</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>

@@ -32,6 +32,14 @@ define_filler :classes do |index, cclass|
   cclass.name
 end
 
+define_filler :weapons do |index, weapon|
+  sprintf("%03d: %s", index, weapon.name)
+end
+
+define_filler :armors do |index, armor|
+  sprintf("%03d: %s", index, armor.name)
+end
+
 def fill_with_tilesets(list)
   tilesets = $project.tilesets
   for i in 1...tilesets.length

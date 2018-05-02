@@ -153,51 +153,94 @@ class Project
   end
 end
 
+module ComparableObject
+  def ==(other)
+    if other.class != self.class
+      return false
+    end
+    if self.instance_variables.length != other.instance_variables.length
+      return false
+    end
+    self.instance_variables.each do |ivar|
+      mine = self.instance_variable_get(ivar)
+      yours = other.instance_variable_get(ivar)
+      if !(mine == yours)
+        return false
+      end
+    end
+    return true
+  end
+end
+
 module RPG
   class Actor
-    attr_accessor :id, :parameters
+    attr_accessor :id, :parameters, :battler_hue, :battler_name,
+                  :character_hue, :character_name
     extend WidgetLinkObject
+    include ComparableObject
     alink "name"
     alink "class_id", :minus_one, :plus_one
     alink "initial_level"
     alink "final_level"
     alink "exp_basis", :to_float, :to_integer
     alink "exp_inflation", :to_float, :to_integer
+    alink "weapon_fix"
+    alink "armor1_fix"
+    alink "armor2_fix"
+    alink "armor3_fix"
+    alink "armor4_fix"
+    alink "weapon_id", :minus_one, :plus_one
+    alink "armor1_id", :minus_one, :plus_one
+    alink "armor2_id", :minus_one, :plus_one
+    alink "armor3_id", :minus_one, :plus_one
+    alink "armor4_id", :minus_one, :plus_one
   end
   class Animation
+    include ComparableObject
     class Frame
+      include ComparableObject
     end
     class Timing
+      include ComparableObject
     end
   end
   class Armor
+    include ComparableObject
     attr_accessor :name
   end
   class AudioFile
     attr_accessor :name
     extend WidgetLinkObject
+    include ComparableObject
     alink "volume", :to_float, :to_integer
     alink "pitch", :to_float, :to_integer
   end
   class Class
     attr_accessor :name
+    include ComparableObject
     class Learning
+      include ComparableObject
     end
   end
   class CommonEvent
     attr_accessor :name, :list, :parameters, :indent, :code
+    include ComparableObject
   end
   class Enemy
+    include ComparableObject
     class Action
+      include ComparableObject
     end
   end
   class Event
     attr_accessor :pages, :x, :y
     extend WidgetLinkObject
+    include ComparableObject
     alink "name"
     class Page
       attr_accessor :condition, :move_route, :graphic, :list
       extend WidgetLinkObject
+      include ComparableObject
       alink "move_type"
       alink "move_speed", :minus_one, :plus_one
       alink "move_frequency", :minus_one, :plus_one
@@ -213,6 +256,7 @@ module RPG
       Custom = 3
       class Condition
         extend WidgetLinkObject
+        include ComparableObject
         alink "switch1_valid"
         alink "switch1_id", :minus_one, :plus_one
         alink "switch2_valid"
@@ -225,6 +269,7 @@ module RPG
       end
       class Graphic
         extend WidgetLinkObject
+        include ComparableObject
         alink "hue", :character_hue, :to_float, :to_integer
         alink "opacity", :to_float, :to_integer
         alink "blending", :blend_type
@@ -234,19 +279,25 @@ module RPG
   end
   class EventCommand
     attr_accessor :name, :parameters
+    include ComparableObject
   end
   class Item
     attr_accessor :name
+    include ComparableObject
   end
   class Map
     attr_accessor :width, :height, :events, :tileset_id, :data, :bgm, :bgs,
-                  :autoplay_bgm, :autoplay_bgs, :encounter_step, :encounter_list
+                  :autoplay_bgm, :autoplay_bgs, :encounter_step,
+                  :encounter_list
+    include ComparableObject
   end
   class MapInfo
     attr_accessor :scroll_x, :name, :expanded, :order, :scroll_y, :parent_id
+    include ComparableObject
   end
   class MoveCommand
     attr_accessor :code, :parameters
+    include ComparableObject
     NoOp = 0
     MoveDown = 1
     MoveLeft = 2
@@ -332,42 +383,55 @@ module RPG
   class MoveRoute
     attr_accessor :list
     extend WidgetLinkObject
+    include ComparableObject
     alink "repeat"
     alink "skippable"
   end
   class Skill
     attr_accessor :name
+    include ComparableObject
   end
   class State
     attr_accessor :name
+    include ComparableObject
   end
   class System
     attr_accessor :variables, :switches, :edit_map_id,
                   :start_map_id, :start_x, :start_y
+    include ComparableObject
     class TestBattler
+      include ComparableObject
     end
     class Words
+      include ComparableObject
     end
   end
   class Tileset
     attr_accessor :tileset_name, :autotile_names, :name
+    include ComparableObject
   end
   class Troop
     attr_accessor :name
+    include ComparableObject
     class Member
+      include ComparableObject
     end
     class Page
+      include ComparableObject
       class Condition
+        include ComparableObject
       end
     end
   end
   class Weapon
     attr_accessor :name
+    include ComparableObject
   end
 end
 
 class Color
   attr_accessor :r, :g, :b, :a
+  include ComparableObject
   def _dump(level)
     [@r, @g, @b, @a].pack('EEEE')
   end
@@ -380,6 +444,7 @@ end
 
 class Tone
   attr_accessor :red, :green, :blue, :gray
+  include ComparableObject
   def _dump(level)
     [@red, @green, @blue, @gray].pack('EEEE')
   end
@@ -392,6 +457,7 @@ end
 
 class Table
   attr_accessor :dims, :width, :height, :depth, :size, :data
+  include ComparableObject
   def initialize(width, height = 1, depth = 1, dims = nil)
     @dims = if dims; dims
             elsif depth > 1; 3

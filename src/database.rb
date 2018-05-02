@@ -15,6 +15,7 @@
 # along with RPGXP.  If not, see <http://www.gnu.org/licenses/>.
 #
 require 'gtk3'
+require_relative 'drawable_curve.rb'
 
 class DatabaseWindow < Gtk::Window
   def initialize
@@ -24,10 +25,15 @@ class DatabaseWindow < Gtk::Window
     buttons = Gtk::ButtonBox.new(:horizontal)
     buttons.layout = :end
     buttons.spacing = 4
+    
     cancel = Gtk::Button.new(stock_id: Gtk::Stock::CANCEL)
+    cancel.signal_connect("clicked") { on_cancel }
+    
     apply = Gtk::Button.new(stock_id: Gtk::Stock::APPLY)
+    
     ok = Gtk::Button.new(stock_id: Gtk::Stock::OK)
     ok.style_context.add_class("suggested-action")
+    
     buttons.add(cancel)
     buttons.add(apply)
     buttons.add(ok)
@@ -36,6 +42,29 @@ class DatabaseWindow < Gtk::Window
     notebook.tab_pos = :left
     notebook.vexpand = true
     notebook.scrollable = true
+    notebook.signal_connect("switch-page") do |w, new_page|
+      if @page
+        @page.apply_object_changes
+        if !(@page.data == @stored)
+          msg = "Do you want to keep changes?"
+          ask = Gtk::MessageDialog.new(message: msg, buttons_type: :none,
+                                       parent: self, flags: :modal)
+          ask.add_button("Discard Changes", :cancel)
+          ok = ask.add_button("Keep Changes", :ok)
+          ok.style_context.add_class("suggested-action")
+          if ask.run == :ok
+            @page.apply_changes
+          else
+            @page.reload_data
+          end
+          ask.destroy
+        end
+      end
+      # Set new values
+      @page = new_page
+      @page.reload_object
+      @stored = new_page.data.deep_clone
+    end
 
     widget = ActorEditor.new
     notebook.append_page(widget, Gtk::Label.new("Actors"))
@@ -54,6 +83,7 @@ class DatabaseWindow < Gtk::Window
     not_implemented(notebook, "System")
 
     vbox = Gtk::Box.new(:vertical)
+    vbox.spacing = 4
     vbox.add(notebook)
     vbox.add(buttons)
     self.add(vbox)
@@ -61,7 +91,18 @@ class DatabaseWindow < Gtk::Window
   end
   def not_implemented(notebook, name)
     label = Gtk::Label.new("This has not been implemented yet")
+    class << label
+      def data
+        nil
+      end
+      def apply_object_changes; end
+      def reload_data; end
+      def reload_object; end
+    end
     notebook.append_page(label, Gtk::Label.new(name))
+  end
+  def on_cancel
+    self.destroy
   end
 end
 
@@ -69,9 +110,10 @@ class GenericDatabaseEditor < Gtk::Box
   def initialize(ui, array, name_getter = :name)
     super(:horizontal)
     @builder = ExtraBuilder.new(ui)
-    @array = array
+    @array_src = array
     @name_getter = name_getter
     @store = Gtk::ListStore.new(String)
+    reload_data
     refresh_store
 
     @tv = Gtk::TreeView.new(@store)
@@ -80,13 +122,7 @@ class GenericDatabaseEditor < Gtk::Box
     column = Gtk::TreeViewColumn.new("Name", renderer, { :text => 0, })
     @tv.append_column(column)
     @tv.signal_connect("cursor-changed") do
-      path = @tv.cursor[0]
-      if path
-        index = path.indices[0]
-        @object = @array[index+1].deep_clone
-        @object.class.bind_to(@builder, @object)
-        on_object_change
-      end
+      reload_object
     end
 
     scroll = Gtk::ScrolledWindow.new(nil, nil)
@@ -97,102 +133,61 @@ class GenericDatabaseEditor < Gtk::Box
     self.add(big_widget(self["widget"], self.screen, 620, 400))
     self.show_all
   end
+  def reload_data
+    @array = @array_src.deep_clone
+  end
+  def reload_object
+    path = @tv.cursor[0]
+    if path
+      apply_object_changes
+      @index = path.indices[0] + 1
+      @object = @array[@index].deep_clone
+      @object.class.bind_to(@builder, @object)
+      on_object_change
+    end
+  end
   def refresh_store
+    @store.clear
     for object in @array[1..-1]
       item = @store.append
       item.set_value(0, object.public_send(@name_getter))
     end
   end
+  def apply_object_changes
+    if @object
+      new = @object.class.extract_from(@builder)
+      on_extract(new)
+      @array[@index] = new
+    end
+  end
+  def apply_changes
+    raise "Apply changes not implemented"
+  end
+  def data
+    @array
+  end
   def on_object_change
-    # Ignore
+  end
+  def on_extract(new)
   end
   def [](widget_name)
     @builder.get_object(widget_name)
   end
 end
 
-class DrawableCurve < Gtk::DrawingArea
-  def initialize(max)
-    super()
-    @max = max.to_f
-    @color = [0.0, 0.0, 0.0]
-    
-    self.signal_connect("draw") do |w, cr|
-      on_draw(cr)
-      cr.destroy
-    end
-  end
-  def on_draw(cr)
-    cr.set_source_rgb(*@color)
-    height = self.allocated_height
-    dx = self.allocated_width / length.to_f
-
-    for index in 0...length
-      y = (self[index] * height) / @max
-      x = dx * index
-      cr.rectangle(x, height-y, dx, y)
-    end
-    cr.fill
-  end
-  def max=(max)
-    @max = max
-    self.queue_draw
-  end
-  def color=(color)
-    @color = color
-    self.queue_draw
-  end
-end
-
-class ListCurve < DrawableCurve
-  def initialize(max)
-    super
-    @list = []
-  end
-  def on_draw(cr)
-    super unless @list.empty?
-  end
-  def list=(list)
-    @list = list
-    self.queue_draw
-  end
-  def length
-    @list.length
-  end
-  def [](index)
-    @list[index]
-  end
-end
-
-class ParameterCurve < DrawableCurve
-  def initialize(max, index, r, g, b)
-    super(max)
-    @index = index
-    @parameters = nil
-    self.color = [r, g, b]
-  end
-  def on_draw(cr)
-    super if @parameters
-  end
-  def parameters=(parameters)
-    @parameters = parameters
-    self.queue_draw
-  end
-  def length
-    99
-  end
-  def [](level)
-    @parameters[@index, level+1]
-  end
-end
-
 class ActorEditor < GenericDatabaseEditor
+  def apply_changes
+    $project.actors = @array.deep_clone
+  end
   def initialize
     super("actor", $project.actors)
     fill_with_classes(self["class_id_list"])
-
-    # Magic number calculated using 50 base 50 inflation values    
-    @exp_graph = ListCurve.new(322987)
+    fill_with_weapons(self["weapon_id_list"])
+    fill_with_armors(self["armor_id_list"])
+    
+    # Magic number calculated using 50 base 50 inflation values
+    max_exp = 322987
+    @exp_graph = ListCurve.new(max_exp)
     @exp_graph.color = [0.05, 0.57, 0.05] 
     self["exp_graph_container"].add(@exp_graph)
     
@@ -213,7 +208,17 @@ class ActorEditor < GenericDatabaseEditor
     link_refresh("initial_level", "final_level", "exp_basis", "exp_inflation")
   end
   def on_object_change
+    super
     refresh
+  end
+  def on_extract(new)
+    super
+    new.character_name = @object.character_name
+    new.parameters = @object.parameters
+    new.battler_hue = @object.battler_hue
+    new.character_hue = @object.character_hue
+    new.id = @object.id
+    new.battler_name = @object.battler_name
   end
   def refresh
     refresh_parameters
@@ -240,7 +245,7 @@ class ActorEditor < GenericDatabaseEditor
     @exp_graph.list = @exp_list
   end
   def self.widget_reader(name)
-    var = "@#{name}#{rand(1000)}".to_sym
+    var = "@__#{name}".to_sym
     define_method name do
       value = self.instance_variable_get(var)
       unless value
@@ -262,4 +267,3 @@ class ActorEditor < GenericDatabaseEditor
     end
   end
 end
-
